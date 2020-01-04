@@ -1,4 +1,4 @@
-##Red Eclipse Server Monitor
+## Red Eclipse Server Monitor
 
 Usage:
 	`./remonitor <server> <port>`  
