@@ -1,7 +1,8 @@
+#! /usr/bin/env python3
 # Red Eclipse 2.0 Server Protocol Implementation
 #
 # Largely based on the redflare source code, which is under the AGPLv3.
-# https://github.com/stainsby/redflare/blob/master/lib/protocol.js
+# https://github.com/stainsby/redflare/
 #
 # This program requires python3 and depends on bitstring.
 
