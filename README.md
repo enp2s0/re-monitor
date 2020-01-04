@@ -1,5 +1,8 @@
 ## Red Eclipse Server Monitor
 
+Configuration:
+	Copy `Config.py.example` to `Config.py` and edit it to match your setup.
+
 Usage:
 	`./remonitor`  
 This will print a bit of info about the server. Edit `Config.py` to set up the
