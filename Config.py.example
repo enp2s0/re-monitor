@@ -22,5 +22,5 @@ ONESHOT = True
 INTERVAL = 1
 # Print the raw server JSON.
 DUMP_DATA = True
-# Hours behind UTC
+# Hours behind UTC for time correction.
 TIMEZONE = 5
