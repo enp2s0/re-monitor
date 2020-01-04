@@ -10,9 +10,15 @@ def pushReport(result):
 	client = InfluxDBClient(Config.INFLUX_HOST, Config.INFLUX_PORT, Config.INFLUX_USER, Config.INFLUX_PASS, Config.INFLUX_DB)
 
 	del result["players"]
+	muts = result["mutators"]
 	del result["mutators"]
 
 	client.create_database(Config.INFLUX_DB)
+
+	gameModeString = ""
+	for mut in muts:
+		gameModeString += f"{mut}-"
+	gameModeString += result["gameMode"]
 
 	# Build the InfluxDB query.
 	influx_data = {}
@@ -25,7 +31,7 @@ def pushReport(result):
 	influx_data["tags"] = {
 		"server": f"{Config.SERVER_HOST}:{Config.SERVER_PORT}",
 		"map": result["mapName"],
-		"gameMode": result["gameMode"]
+		"gameMode": gameModeString
 	}
 
 	# Time, adjusted for timezone.
