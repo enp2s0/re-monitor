@@ -4,8 +4,19 @@ import bitstring
 
 import Protocol
 
-lastChecked = None
-lastIDCounter = 0
+def stripString(name):
+	nameColorPrefix = "\fs\f"
+	privatePrefix = "\f($"
+
+	if name.index(nameColorPrefix) == 0:
+		start = name.index("]") + 1
+		name = name[start:-2]
+
+	if name.index(privatePrefix) == 0:
+		start = name.index("]") + 1
+		name = name[start:]
+
+	return name
 
 # TODO: parse player names.
 def processServerReply(host, port, reply):
@@ -72,6 +83,25 @@ def processServerReply(host, port, reply):
 
 	report["versionName"] = versionName
 	report["description"] = serverName
+	report["versionBranch"] = stream.readNextString()
+
+	players = []
+	for i in range(report["clients"]):
+		rawName = stream.readNextString()
+		plainName = stripString(rawName)
+
+		nameParts = rawName.split("\f")
+		if len(nameParts) > 3:
+			privPart = nameParts[3].strip()[6:-4]
+		else:
+			privPart = "unknown"
+
+		player = {}
+		player["name"] = plainName
+		player["privilege"] = privPart
+		players.append(player)
+
+	report["players"] = players
 
 	return report
 
