@@ -13,15 +13,22 @@ def pushReport(result):
 	del result["mutators"]
 
 	client.create_database(Config.INFLUX_DB)
+
+	# Build the InfluxDB query.
 	influx_data = {}
 
+	# Fill the data fields.
 	influx_data["measurement"] = f"{Config.SERVER_HOST}:{Config.SERVER_PORT}"
 	influx_data["fields"] = result
+
+	# Set some string values to tags to facilitate easy grouping.
 	influx_data["tags"] = {
 		"server": f"{Config.SERVER_HOST}:{Config.SERVER_PORT}",
 		"map": result["mapName"],
 		"gameMode": result["gameMode"]
 	}
+
+	# Time, adjusted for timezone.
 	influx_data["time"] = time.strftime(f'%Y-%m-%dT%H:%M:%SZ+{Config.TIMEZONE}')
 
 	if Config.DEBUG:

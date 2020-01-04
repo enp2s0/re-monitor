@@ -19,7 +19,7 @@ INFLUX_DB = "redeclipse"
 # Run once and exit.
 ONESHOT = False
 # Report rate in seconds.
-INTERVAL = 3
+INTERVAL = 1
 # Print the raw server JSON.
 DUMP_DATA = False
 # Hours behind UTC
