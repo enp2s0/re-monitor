@@ -7,7 +7,7 @@
 # This program requires python3 and depends on bitstring.
 
 import sys
-import REServer
+import REServerQuery
 
 if len(sys.argv) != 3:
 	print("Usage: remonitor.py <server> <port>")
@@ -16,5 +16,5 @@ if len(sys.argv) != 3:
 host = sys.argv[1]
 port = int(sys.argv[2])
 
-data = REServer.doServerQuery(host, port)
+data = REServerQuery.doServerQuery(host, port)
 print(data)
