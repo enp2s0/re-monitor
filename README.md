@@ -1,8 +1,7 @@
-Red Eclipse Server Monitor
+##Red Eclipse Server Monitor
 
 Usage:
-	`./remonitor <server> <port>`
-
+	`./remonitor <server> <port>`  
 This will print a bit of info about the server.
 
 Currently this project only supports protocol version 245, which corresponds to
