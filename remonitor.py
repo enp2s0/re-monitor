@@ -4,17 +4,24 @@
 # Largely based on the redflare source code, which is under the AGPLv3.
 # https://github.com/stainsby/redflare/
 #
-# This program requires python3 and depends on bitstring.
+# This program requires python3 and depends on bitstring and InfluxDB-python.
 
 import sys
-import REServerQuery
+import time
 
-if len(sys.argv) != 3:
-	print("Usage: remonitor.py <server> <port>")
-	exit(1)
+from REServerInterface import REServerQuery
+import InfluxOutput
+import Config
 
-host = sys.argv[1]
-port = int(sys.argv[2])
+while True:
+	data = REServerQuery.doServerQuery(Config.SERVER_HOST, Config.SERVER_PORT)
+	if Config.DUMP_DATA:
+		print(data)
 
-data = REServerQuery.doServerQuery(host, port)
-print(data)
+	if Config.INFLUX_ENABLE:
+		InfluxOutput.pushReport(data)
+
+	if Config.ONESHOT:
+		break
+
+	time.sleep(Config.INTERVAL)

@@ -2,7 +2,7 @@ import sys
 import socket
 import bitstring
 
-import Protocol
+from . import Protocol
 
 def stripString(name):
 	nameColorPrefix = "\fs\f"
