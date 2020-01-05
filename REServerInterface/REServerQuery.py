@@ -109,9 +109,15 @@ def doServerQuery(host, port):
 	client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 	query = bitstring.BitArray("0x81EC040100")
 
-	client.sendto(query.bytes, (host, port))
-	reply, server = client.recvfrom(8192)
-	client.close()
+	try:
+		client.sendto(query.bytes, (host, port))
+		client.settimeout(2)
+		reply, server = client.recvfrom(8192)
+		client.close()
+	except socket.timeout:
+		print(f"{host}:{port} timed out!")
+		client.close()
+		return None
 
 	report = processServerReply(host, port, bitstring.BitStream(reply))
 

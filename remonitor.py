@@ -15,6 +15,9 @@ import Config
 
 while True:
 	data = REServerQuery.doServerQuery(Config.SERVER_HOST, Config.SERVER_PORT)
+	if data == None:
+		continue
+
 	if Config.DUMP_DATA:
 		print(data)
 
