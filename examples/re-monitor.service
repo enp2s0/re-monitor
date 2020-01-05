@@ -1,0 +1,12 @@
+[Unit]
+Description=Red Eclipse Server Monitor
+After=network.target re-server.service
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/root/re-monitor/remonitor.py
+WorkingDirectory=/root/re-monitor/
+KillMode=process
+Restart=on-failure
