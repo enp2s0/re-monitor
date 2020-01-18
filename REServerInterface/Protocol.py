@@ -87,8 +87,8 @@ class Protocol245:
 			if gameSpecificMutators:
 				idx = 0
 				for mut, val in self.modeSpecificMutators.items():
-					if flags & val and idx < gameSpecificMutators.length:
-						muts.push(gameSpecificMutators[mut])
+					if flags & val and idx < len(gameSpecificMutators):
+						muts.append(gameSpecificMutators[idx])
 					idx += 1
 
 		return muts
